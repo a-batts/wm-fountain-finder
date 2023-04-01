@@ -19,12 +19,12 @@ model Building {
   name      String
   floors    String
   isPublic  Boolean   @default(true)
-  fountains Fountain?
+  fountains Fountain[]
 }
 
 model Fountain {
   id              Int      @id @default(autoincrement())
-  buildingId      Int      @unique
+  buildingId      Int
   floor           Int
   lat             Float
   long            Float
