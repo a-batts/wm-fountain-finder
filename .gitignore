@@ -1,4 +1,5 @@
 .vscode
+.idea
 .angular
 node_modules
 
