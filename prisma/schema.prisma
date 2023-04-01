@@ -15,6 +15,7 @@ model Building {
   name String
   fountains Fountain[]
   floors String //Just going to JSON.parse the floors
+  isPublic Boolean @default(true)
 }
 
 model Fountain {
