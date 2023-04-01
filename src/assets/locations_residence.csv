@@ -1,0 +1,24 @@
+"Residence hall
+water fountain locations",,,,,,,,Buildings List,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+Building,Floor,Latitude,Longitude,Has bottle filling station?,Filter status,"Physical location(e.g. 
+near elevator, next to room 1120)",,Name,"Number of
+fountains",Completed?
+,,,,,,,,,,
+Old Dominion,1,"17°16'21"" N","76°42'44"" W","Yes, bottle filling only",Green,"Next to all gender restroom, no normal fountain",,,,
+,2,37 16 21 N,76 42 44 W,No,,At top of main staircase,,,,
+,3,37 16 20 N,76 42 44 W,No,,At top of main staircase ,,,,
+Monroe,1,37 16 19 ,76 42 37,Yes,Green,Next to GNR,,,,
+,2,37 16 20,76 42 37,Yes,Green,Next to woman's showers,,,,
+,3,37 16 20 N,76 42 37 W,Yes,Green,Next to men's showers,,,,
+DuPont,1,37.269937,-76.719983,yes,green,next to room 110,,,,
+,B,37.269762,-76.719346,yes,green,in basement hall,,,,
+,1,37.269757,-76.719388,yes,green,next to 143,,,,
+,2,37.269757,-76.719388,yes,green,next to 243,,,,
+,2,37.269847,-76.719686,yes,green,next to 230,,,,
+,2,37.269937,-76.719983,yes,green,next to 210,,,,
+,3,37.269937,-76.719983,yes,green ,next to 310,,,,
+,3,37.269847,-76.719686,yes,green ,next to 330,,,,
+,3,37.269757,-76.719388,yes,green,next to 343,,,,

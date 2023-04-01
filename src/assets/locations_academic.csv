@@ -1,0 +1,112 @@
+"Academic and student service building
+water fountain locations",,,,,,,,Buildings List,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+Building,Floor,Latitude,Longitude,Has bottle filling station?,Filter status,"Physical location(e.g.
+near elevator, next to room 1120)",,Name,"Number of
+fountains",Completed?
+,,,,,,,,,,
+Blair Hall,1,37°16′13″ N,76°42′41″ W,No,,Across from elevator - Out of service,,Adair Hall,4,TRUE
+,2,"37°16'17"" N","76°42'42"" W",No,,Next to women's bathroom,,Andrews Hall,4,TRUE
+,3,"37°16'17"" N","76°42'42"" W",No,,Next to women's bathroom,,Blow Memorial Hall,4,TRUE
+Blow Hall,1,37 16 18N,76 42 40W,No,,In social sciences research center ,,Boswell Hall,4,TRUE
+,1,37.272454,-76.711096,Yes,Green,Next to elevator,,Campus Center,4,FALSE
+,2,37.272454,-76.711096,Yes,Green,Next to elevator ,,Chancellors Hall,4,TRUE
+,3,37.272454,-76.711096,No,,Next to elevator ,,Cohen Career Center,,FALSE
+Tucker Hall,B,37 16 17 N,76 42 36 W,No,,Next to linguistics lab - room 020,,College Apartments,,TRUE
+,1,37 16 17,76 42 36,Yes,Green,Next to men's restroom,,Ewell Hall,3,TRUE
+,2,37 16 18,76 42 36,No,,Next to women,,Integrated Science Center,17,FALSE
+Chancellor's ,1,37 16 17,76 42 39,Yes,Yellow,"Near women's restroom, outside room 123",,James Blair Hall,3,TRUE
+,2,37 16 17 ,76 42 38,No,,Across from elevator,,Jones Hall,,TRUE
+,3,,,No,,Across from elevator,,Law School,,FALSE
+,4,,,No,,Next to 425,,McGlothin-Street Hall,4,TRUE
+Ewell ,1,37 16 13 ,76 42 36,Yes,Red,Next to elevator and women's restroom,,Miller Hall,6,TRUE
+,B,,,No,,Next to men's restroom ,,Sadler Center,,FALSE
+,2,37 16 12 N,76 42 36 W,Yes,Green,Next to elevator and women's restrooms,,School of Education,,FALSE
+Washington,1,,,,,,,Small Hall,11,TRUE
+,2,37 16 13 N,76 42 39 W,Yes,Green,Next to men's restroom,,Student Health Center,,FALSE
+,3,,,No,,Next to men's restroom,,Student Recreation Center,,FALSE
+McGlothlin-Street,G,37 16 12,76 42 42,Yes,Yellow,"Across from room 1, near lecture hall ",,Swem Library,9,TRUE
+,1,37 16 12,76 42 43,Yes,Green,"Near room 104C, down main hallway ",,Tucker Hall,3,TRUE
+,2,,,Yes,Green,Near room 207,,Washington Hall,3,TRUE
+,3,37 16 13 N,,Yes ,Green,,,Wren Building,1,TRUE
+Campus Center,1,37 16 9 N,76 42 31 W,Yes,Green ,Under the Haven sign,,,,
+,B,37 16 12 N,76 42 29 W,No,,Near student publication lab and elevator,,,,
+,2,,,No,,Across from elevator,,,,
+,2,37 16 11 N,76 42 30 W,,,Near student organizations suite ,,,,
+Wren,2,37 15 16 N,76 42 32 W,Yes,Green,Near classroom 301 and men's bathroom,,,,
+ISC,1,,,Yes,Green,Next to big lecture hall ,,,,
+,1,,,Yes,Green,Next to bathrooms near 1127 lecture hall,,,,
+,1,,,Yes,Red,Next to bathrooms at end of psych hallway ,,,,
+,1,,,Yes,Green,Across from chem library ,,,,
+,1,,,No,,By bathrooms in ISC 3,,,,
+,2,,,No,,Next to elevator by walkway to ISC 3,,,,
+,2,,,Yes,N/A,In chem lounge by elevator,,,,
+,2,,,No,,At end of walkway between ISC 2 and 3,,,,
+,2,,,No,,Near ISC 3 east stairwell,,,,
+,2,,,No,,By bathrooms in ISC 3,,,,
+,3,,,No,,Next to elevator by walkway to ISC 3,,,,
+,3,,,No,,In bio lounge around corner from elevator ,,,,
+,3,,,No,,By bathrooms in ISC 3,,,,
+,3,,,No,,Near ISC 3 east stairwell,,,,
+,G,,,No,,By bathrooms in ISC 3,,,,
+,G,,,No,,Near ISC east stairwell ,,,,
+,G,,,No,,In ISC 1 lobby ,,,,
+,G,,,,,,,,,
+Health Center,1,37 16 16 ,76 42 53,Yes,Green,Health Center Waiting Room,,,,
+Miller Hall (B School),1,37.266494,-76.718547,Yes,Green,"Graduate wing, across from 1023",,,,
+,2,37.266465,-76.718449,No,,"Graduate wing, by elevator",,,,
+,2,37.266028,-76.718441,No,,"Undergrad wing, across from 2041 academic affairs",,,,
+,1,37.266081,-76.718517,No,,"Undergrad wing, across from women's restroom and 1068",,,,
+,B,37.266303,-76.718369,No,,"Undergrad side, across from 0006",,,,
+,B,37.266469,-76.718407,No,,"Grad side, across from elevator",,,,
+Adair Hall,2,37.268522,-76.718065,Yes,Green,Across from 203,,,,
+,1,37.268522,-76.718065,No,,Across from 112,,,,
+,B,37.268681,-76.718109,No,,Next to women's locker room,,,,
+,4,37.268699,-76.718082,No,,Next to dance studio,,,,
+Small Hall,G,37.268681,-76.717246,No,,By elevator 1,,,,
+,G,37.268777,-76.716786,No,,"Next to stair B, across from 024",,,,
+,1,37.268736,-76.716666,No,,Across from kitchen,,,,
+,1,37.268791,-76.716814,Yes,Green,Across from men's bathroom,,,,
+,1,37.268857,-76.717106,No,,Across from elevator 2,,,,
+,1,37.268781,-76.717138,No,,Nook across from elevator 1,,,,
+,2,37.268781,-76.717138,No,,Nook across from elevator 1,,,,
+,2,37.268791,-76.716814,No,,Across from men's bathroom,,,,
+,2,37.268857,-76.717106,No,,Across from elevator 2,,,,
+,3,37.268791,-76.716814,Yes,Green,Across from men's bathroom,,,,
+,3,37.268857,-76.717106,No,,Across from elevator 2,,,,
+Jones Hall,1,37.268036,-76.716705,No,,"Office area, across from 114",,,,
+,1,37.26813,-76.716978,Yes,Green,Across from 107,,,,
+,2,37.268168,-76.716978,No,,Next to tech support,,,,
+,2,37.268036,-76.716705,Yes,Green,Office area,,,,
+,3,37.268036,-76.716705,Yes,Green,Office area,,,,
+,3,37.268168,-76.716978,Yes,Yellow,Next to 301,,,,
+,B,37.268168,-76.716978,Yes,Green,Across from rm 6,,,,
+,B,37.267992,-76.71665,No,,Across from muscarelle entrance,,,,
+Boswell Hall,G,37.26742,-76.716918,Yes,Green,Across from 37,,,,
+,1,37.26742,-76.716918,Yes,Green,Across from 139,,,,
+,2,37.26742,-76.716918,No,,Across from 238,,,,
+,3,37.26742,-76.716918,No,,Across from 341,,,,
+Andrews Hall,1,37.268617,-76.715567,Yes,RED!!,Across from 101,,,,
+,1,37.268631,-76.715186,No,,Next to sculpture studio,,,,
+,2,37.268631,-76.715186,"Yes, bottle filling only",Green,Across from 222,,,,
+,2,37.268665,-76.715354,No,,Across from 209,,,,
+Swem Library,1,37.269755,-76.716276,Yes,Green,Information commons by women's bathroom,,,,
+,1,37.269672,-76.716451,No,,Information commons by men's bathroom,,,,
+,1,37.270081,-76.715711,Yes,Green,Next to special collections,,,,
+,2,37.270081,-76.715711,No,,By special collections stair,,,,
+,2,37.269833,-76.716293,Yes,Green,By stack HD1751,,,,
+,3,37.270081,-76.715711,No,,By special collections stair,,,,
+,3,37.269833,-76.716293,Yes,Green,By stack PS1331,,,,
+,B,37.270081,-76.715711,No,,By special collections stair,,,,
+,B,37.269516,-76.71617,Yes,Green,To Botetourt statue's back,,,,
+,,,,,,,,,,
+Law Library ,1,37.265042,-76.705012,No,,across from room 119,,,,
+,1,37.265288,-76.705095,No,,across from mcglothlin court room,,,,
+,1,37.265288,-76.705095,Yes,Green,across from penny commons,,,,
+,2,37.265436,-76.704776,Yes,Green,next to penny and young court room,,,,
+,2,37.265436,-76.704776,Yes,Green,next to room 245,,,,
+,2,37.265161,-76.704809,No,,next to 201,,,,
+,2,37.265161,-76.704809,No,,next to 226,,,,
+Rec Center,1,37.27437,-76.722102,yes,green,by the elevator ,,,,
