@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+  url      = "(function)"
+}
+
+generator tsed {
+  provider           = "tsed-prisma"
+  output             = "../prisma/generated/tsed"
+  emitTranspiledCode = "true"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Building {
+  id        Int       @id @default(autoincrement())
+  name      String
+  floors    String
+  isPublic  Boolean   @default(true)
+  fountains Fountain?
+}
+
+model Fountain {
+  id              Int      @id @default(autoincrement())
+  buildingId      Int      @unique
+  floor           Int
+  lat             Float
+  long            Float
+  location        String
+  hasBottleFiller Boolean
+  filterStatus    Int
+  developerPick   Boolean
+  building        Building @relation(fields: [buildingId], references: [id])
+}
