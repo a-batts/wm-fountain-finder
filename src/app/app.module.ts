@@ -11,9 +11,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchPaneComponent],
+  declarations: [AppComponent, SearchPaneComponent, MapComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
