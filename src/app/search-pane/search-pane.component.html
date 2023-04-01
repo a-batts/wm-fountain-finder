@@ -3,12 +3,12 @@
     <div class="flex gap-x-4">
       <mat-form-field class="flex-grow" appearance="outline">
         <mat-label>Search by building</mat-label>
-        <mat-icon matPrefix>search</mat-icon>
-        <input type="search" matInput
+        <mat-icon matPrefix class="icon-prefix-padding">search</mat-icon>
+        <input type="text" matInput
                placeholder="Ex. Sadler Center"
                [formControl]="buildingSelector"
                [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-autocomplete #auto="matAutocomplete" hideSingleSelectionIndicator>
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
             {{option.name}}
           </mat-option>
@@ -16,7 +16,7 @@
       </mat-form-field>
 
       <mat-form-field class="w-40" appearance="outline">
-        <mat-select [(value)]="selectedFloor">
+        <mat-select [(value)]="selectedFloor" hideSingleSelectionIndicator>
           <mat-option *ngFor="let floor of getPossibleFloors()" [value]="floor">
             {{floor}}
           </mat-option>
