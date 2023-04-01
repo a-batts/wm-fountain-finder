@@ -9,3 +9,23 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Building {
+  id Int @id @default(autoincrement())
+  name String
+  fountains Fountain[]
+  floors String //Just going to JSON.parse the floors
+}
+
+model Fountain {
+  id Int @id @default(autoincrement())
+  buildingId Int @unique
+  building Building @relation(fields: [buildingId], references: [id])
+  floor Int
+  lat Float
+  long Float
+  location String
+  hasBottleFiller Boolean
+  filterStatus Int
+  developerPick Boolean
+}
