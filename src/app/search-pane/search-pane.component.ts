@@ -3,6 +3,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { Floor } from '../types/Floor';
 import { Building } from '../types/Building';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-search-pane',
@@ -13,18 +14,10 @@ export class SearchPaneComponent implements OnInit {
   //The floor the user wants to view fountains for when searching
   selectedFloor: Floor;
   buildingSelector = new FormControl('');
-  buildings: Building[] = [
-    new Building('Sadler Center', [Floor.First, Floor.Second, Floor.Third]),
-    new Building('Ewell Hall', [Floor.Basement, Floor.First, Floor.Second]),
-    new Building('Jones Hall', [
-      Floor.Basement,
-      Floor.First,
-      Floor.Second,
-      Floor.Third,
-    ]),
-  ];
+  buildings: Building[] = [];
+
   filteredOptions: Observable<Building[]>;
-  constructor() {
+  constructor(private client: HttpClient) {
     this.selectedFloor = Floor.Any;
 
     this.filteredOptions = this.buildingSelector.valueChanges.pipe(
@@ -33,7 +26,11 @@ export class SearchPaneComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.client
+      .get('/rest/buildings')
+      .subscribe((result) => this.initBuildings(result as Object[]));
+  }
 
   /**
    * Get the possible floor options for the currently selected building.
@@ -50,6 +47,29 @@ export class SearchPaneComponent implements OnInit {
     });
 
     return [Floor.Any.valueOf(), ...possibleFloors];
+  }
+
+  /**
+   * Initialize all building objects to enable the search box autofill capabilities,
+   * and the floor selector for each building
+   * @param buildings
+   * @private
+   */
+  private initBuildings(buildings: Object[]): void {
+    buildings.forEach((building: any) => {
+      let floors: Floor[] = [];
+
+      //Add the existing floors to the building
+      let buildingFloors: string = building.floors;
+
+      if (buildingFloors.includes('0')) floors.push(Floor.Basement);
+      if (buildingFloors.includes('1')) floors.push(Floor.First);
+      if (buildingFloors.includes('2')) floors.push(Floor.Second);
+      if (buildingFloors.includes('3')) floors.push(Floor.Third);
+      if (buildingFloors.includes('4')) floors.push(Floor.Fourth);
+
+      this.buildings.push(new Building(building.name, floors));
+    });
   }
 
   /**

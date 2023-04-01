@@ -1,6 +1,6 @@
 export enum Floor {
   Any = 'Any floor',
-  Basement = 'Zero/basement floor',
+  Basement = 'Zero floor',
   First = '1st floor',
   Second = '2nd floor',
   Third = '3rd floor',
