@@ -1,0 +1,47 @@
+<div mat-dialog-title class="dialog-title">
+  <h2 class="dialog-title-text">Feedback</h2>
+  <button mat-icon-button aria-label="close dialog" mat-dialog-close="Close"
+  matTooltip="Close feedback form">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content class="mat-typography">
+  <div class="feedback-form flex flex-col gap-y-2 pt-4">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input type="name" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="nameFormControl.hasError('required')">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+             placeholder="Ex. president@wm.edu">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-radio-group class="flex flex-col mb-4" aria-label="Select an option">
+      <mat-radio-button value="listing-issue">Fountain listing issue</mat-radio-button>
+      <mat-radio-button value="bug">Report a bug</mat-radio-button>
+      <mat-radio-button value="comment">Comments</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Tell us more!</mat-label>
+      <textarea matInput [formControl]="messageFormControl" [errorStateMatcher]="matcher"></textarea>
+      <mat-error *ngIf="messageFormControl.hasError('required')">
+        A message is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="submit-container" align="end">
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</mat-dialog-actions>

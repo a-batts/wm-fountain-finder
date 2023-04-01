@@ -12,11 +12,21 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import {
+  FeedbackFormComponent,
+  FeedbackFormDialog,
+} from './feedback-form/feedback-form.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
-  declarations: [AppComponent, SearchPaneComponent, FeedbackFormComponent],
+  declarations: [
+    AppComponent,
+    SearchPaneComponent,
+    FeedbackFormComponent,
+    FeedbackFormDialog,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +39,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
