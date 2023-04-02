@@ -147,6 +147,9 @@ export class SearchPaneComponent implements OnInit {
    */
   zoomToFountain(fountain: Fountain): void {
     this.selectedFountain.emit(fountain);
+
+    //Reset the search box so that the search results panel becomes hidden
+    this.buildingSelector.reset();
     alert('Zoom to be implemented!');
   }
 
@@ -157,6 +160,9 @@ export class SearchPaneComponent implements OnInit {
    */
   private _filter(value: string): Building[] {
     const filterValue = value.toLowerCase();
+
+    //When the user starts to search, unselect the currently selected fountain to hide the panel
+    if (value) this.selectedFountain.emit(undefined);
 
     return this.buildings.filter((building: Building) =>
       building.name.toLowerCase().includes(filterValue)
