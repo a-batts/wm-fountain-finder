@@ -29,4 +29,8 @@ export class FountainDescriptionComponent {
     //Ideally should save to a database
     console.log(status);
   }
+
+  zoomToFountain(): void {
+    //TODO
+  }
 }

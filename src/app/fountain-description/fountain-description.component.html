@@ -22,7 +22,7 @@
     </div>
     <div class="flex mt-6 relative">
       <div class="flex-grow">
-        <button mat-button color="primary">Zoom to on map</button>
+        <button mat-button color="primary" (click)="zoomToFountain()">Zoom to on map</button>
       </div>
       <div *ngIf="fountain.filterStatus > 1">
         <button mat-button color="primary" (click)="showFilterStatusPopup()">Report filter status</button>
