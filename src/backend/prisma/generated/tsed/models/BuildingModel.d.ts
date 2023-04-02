@@ -5,5 +5,5 @@ export declare class BuildingModel implements Building {
     name: string;
     floors: string;
     isPublic: boolean;
-    fountains: FountainModel | null;
+    fountains: FountainModel[];
 }

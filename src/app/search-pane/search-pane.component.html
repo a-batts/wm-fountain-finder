@@ -1,14 +1,14 @@
-<mat-card class="max-w-lg">
+<mat-card class="max-w-xl">
   <mat-card-content>
-    <div class="flex gap-x-4">
+    <div class="flex flex-wrap gap-x-4">
       <mat-form-field class="flex-grow" appearance="outline">
         <mat-label>Search by building</mat-label>
-        <mat-icon matPrefix>search</mat-icon>
-        <input type="search" matInput
+        <mat-icon matPrefix class="icon-prefix-padding">search</mat-icon>
+        <input type="text" matInput
                placeholder="Ex. Sadler Center"
                [formControl]="buildingSelector"
                [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-autocomplete #auto="matAutocomplete" hideSingleSelectionIndicator>
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
             {{option.name}}
           </mat-option>
@@ -16,9 +16,20 @@
       </mat-form-field>
 
       <mat-form-field class="w-40" appearance="outline">
-        <mat-select [(value)]="selectedFloor">
+        <mat-select [(value)]="selectedFloor" hideSingleSelectionIndicator>
           <mat-option *ngFor="let floor of getPossibleFloors()" [value]="floor">
             {{floor}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-64" appearance="outline">
+        <mat-select [(value)]="showingOnlyWithFillers" hideSingleSelectionIndicator>
+          <mat-option [value]="false">
+            All fountains
+          </mat-option>
+          <mat-option [value]="true">
+            Fountains with bottle fillers
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -28,5 +39,31 @@
         or <span class="underline hover:text-blue-500 hover:cursor-pointer" (click)="getCurrentLocation()">use current location</span>
       </p>
     </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="max-w-lg mt-4" *ngIf="searchIsValidBuilding">
+  <mat-card-content class="card-content">
+    <div *ngIf="possibleBuildingFountains.length > 0; else noFountains">
+      <h2>Results</h2>
+      <div class="fountain-list">
+        <mat-list>
+          <mat-list-item matRipple  *ngFor="let fountain of possibleBuildingFountains">
+            <span matListItemTitle>{{fountain.buildingName}} {{fountain.floor}}</span>
+            <span matListItemLine>{{fountain.location}}</span>
+            <button mat-icon-button matListItemMeta (click)="zoomToFountain(fountain)" matTooltip="Zoom to location on map">
+              <mat-icon>zoom_in_map</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+
+    <ng-template #noFountains>
+        <div class="flex items-center justify-center flex-col gap-y-6 py-6">
+          <mat-icon class="text-6xl location-icon">not_listed_location</mat-icon>
+          <h3>We couldn't find any fountains matching your request</h3>
+        </div>
+    </ng-template>
   </mat-card-content>
 </mat-card>

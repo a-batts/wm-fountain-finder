@@ -20,7 +20,7 @@ model Building {
 
 model Fountain {
   id Int @id @default(autoincrement())
-  buildingId Int @unique
+  buildingId Int
   building Building @relation(fields: [buildingId], references: [id])
   floor Int
   lat Float

@@ -1,32 +1,46 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SearchPaneComponent } from './search-pane/search-pane.component';
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MapComponent } from './map/map.component';
+import {
+  FeedbackFormComponent,
+  FeedbackFormDialog,
+} from './feedback-form/feedback-form.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { HttpClientModule } from '@angular/common/http';
+import { MatListModule } from '@angular/material/list';
+import { MatRippleModule } from '@angular/material/core';
+import { FountainDescriptionComponent } from './fountain-description/fountain-description.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchPaneComponent, MapComponent],
+  declarations: [
+    AppComponent,
+    SearchPaneComponent,
+    FeedbackFormComponent,
+    FeedbackFormDialog,
+    FountainDescriptionComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatIconModule,
     MatSelectModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatListModule,
+    MatRippleModule,
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(iconRegistry: MatIconRegistry) {
+    iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
+  }
+}

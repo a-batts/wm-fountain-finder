@@ -1,0 +1,49 @@
+<mat-card class="max-w-md mt-4" *ngIf="fountain != undefined">
+  <mat-card-content class="card-content">
+    <div class="flex items-center">
+      <div class="flex-grow pl-3">
+        <h1 class="font-bold building-title">{{fountain.buildingName}} {{fountain.floor}}</h1>
+      </div>
+      <button mat-icon-button (click)="closeDescriptionPanel()" matTooltip="Close">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="pl-3 pt-4">
+      <h4>This fountain {{fountain.filterStatus > 0 ? 'has' : 'doesn\'t have'}} a bottle filling station</h4>
+      <div class="gap-x-4 items-center flex" *ngIf="fountain.filterStatus > 1">
+        <p class="filter-status">Filter status</p>
+        <div class="w-6 h-6 rounded-full" [class]="fountain.getFilterColor()"></div>
+      </div>
+      <div class="my-4">
+        <mat-divider></mat-divider>
+      </div>
+      <p>Location:</p>
+      <h3>{{fountain.location}}</h3>
+    </div>
+    <div class="flex mt-6 relative">
+      <div class="flex-grow">
+        <button mat-button color="primary">Zoom to on map</button>
+      </div>
+      <div *ngIf="fountain.filterStatus > 1">
+        <button mat-button color="primary" (click)="showFilterStatusPopup()">Report filter status</button>
+      </div>
+      <div class="absolute right-0 top-10" *ngIf="showingFilterStatusPopup">
+        <mat-card>
+          <mat-card-content class="px-2">
+            <div class="flex items-center gap-x-2">
+              <h2 class="pl-4 flex-grow filter-status-popup-text">Report current filter status</h2>
+              <button mat-icon-button (click)="showingFilterStatusPopup = false" matTooltip="Close">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div class="flex gap-x-12 py-3 items-center justify-center">
+              <button class="h-14 w-14 filter-green rounded-full" matRipple (click)="reportFilterStatus(2)"></button>
+              <button class="h-14 w-14 filter-yellow rounded-full" matRipple (click)="reportFilterStatus(3)"></button>
+              <button class="h-14 w-14 filter-red rounded-full" matRipple (click)="reportFilterStatus(4)"></button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

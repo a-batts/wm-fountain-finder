@@ -1,0 +1,27 @@
+::ng-deep .mdc-notched-outline__notch {
+  border-right: none !important;
+}
+
+.location-icon {
+  height: auto !important;
+  width: auto !important;
+}
+
+.card-content {
+  max-height: 18.75rem;
+}
+
+.fountain-list {
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+//Fix issues with the display of the buttons in the mdc list
+.mdc-list-item--with-trailing-meta.mdc-list-item--with-two-lines .mdc-list-item__end{
+  align-self: center;
+}
+
+.mdc-list-item--with-trailing-meta.mdc-list-item--with-two-lines .mdc-list-item__end::before{
+  height: 0;
+}
+
