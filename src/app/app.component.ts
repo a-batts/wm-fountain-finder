@@ -11,7 +11,6 @@ export class AppComponent {
   fountain: Fountain | undefined;
 
   onSelectedFountain(fountain: Fountain) {
-    console.log('hi');
     this.fountain = fountain;
   }
 }
