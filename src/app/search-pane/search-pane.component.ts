@@ -17,10 +17,12 @@ export class SearchPaneComponent implements OnInit {
 
   //The floor the user wants to view fountains for when searching
   selectedFloor: Floor;
+  showingOnlyWithFillers: Boolean = false;
   buildingSelector = new FormControl('');
   buildings: Building[] = [];
   filteredOptions: Observable<Building[]>;
-  isValidBuilding: boolean = false;
+  searchIsValidBuilding: boolean = false;
+
   constructor(private client: HttpClient) {
     this.selectedFloor = Floor.Any;
 
@@ -45,23 +47,29 @@ export class SearchPaneComponent implements OnInit {
     let possibleFloors: string[] = [];
 
     //Whether the entered building name is a valid building
-    this.isValidBuilding = false;
+    this.searchIsValidBuilding = false;
 
     this.buildings.forEach((building: Building) => {
       if (building.name == this.buildingSelector.value) {
         possibleFloors = building.floors;
 
         //The building matches so it is valid
-        this.isValidBuilding = true;
+        this.searchIsValidBuilding = true;
       }
     });
 
     return [Floor.Any.valueOf(), ...possibleFloors];
   }
 
+  /**
+   * Get the possible fountains the user might be interested in,
+   * based on the selected building, selected floor, and if the user
+   * is only looking for fountains with bottle fillers or not
+   */
   get possibleBuildingFountains(): Fountain[] {
     let possibleFountains: Fountain[] = [];
 
+    //Find the fountains that belong to the search query building
     this.buildings.forEach((building: Building) => {
       if (building.name == this.buildingSelector.value) {
         possibleFountains = building.fountains;
@@ -69,10 +77,14 @@ export class SearchPaneComponent implements OnInit {
     });
 
     //Return the fountains that match the selected filter, or all of the fountains if all floors is selected
-    return possibleFountains.filter(
-      (fountain: Fountain) =>
+    return possibleFountains.filter((fountain: Fountain) => {
+      //If the user is viewing only fountains with bottle fillers, hide the ones without one
+      if (this.showingOnlyWithFillers && !fountain.hasFilter) return false;
+
+      return (
         fountain.floor == this.selectedFloor || this.selectedFloor == Floor.Any
-    );
+      );
+    });
   }
 
   /**
@@ -121,6 +133,7 @@ export class SearchPaneComponent implements OnInit {
             fountain.lat,
             fountain.long,
             fountain.location,
+            fountain.hasBottleFiller,
             fountain.filterStatus as FilterStatus,
             fountain.developerPick,
             building.name

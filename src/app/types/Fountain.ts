@@ -8,6 +8,7 @@ export class Fountain {
     public lat: Number,
     public long: Number,
     public location: String,
+    public hasFilter: Boolean,
     public filterStatus: FilterStatus,
     public developerPick: Boolean,
     public buildingName: String
