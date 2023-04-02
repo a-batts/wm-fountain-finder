@@ -1,5 +1,6 @@
-<div class="px-8 py-6 mat-app-background h-screen">
-  <div class="flex">
+<div class="mat-app-background h-screen w-screen">
+  <app-map class="fixed z-10"></app-map>
+  <div class="flex px-8 py-6 absolute left-0 top-0 w-screen h-screen z-50">
     <div class="flex-grow">
       <app-search-pane (selectedFountain)="onSelectedFountain($event)"></app-search-pane>
       <app-fountain-description [(fountain)]="fountain"></app-fountain-description>
@@ -7,6 +8,6 @@
     <app-feedback-form></app-feedback-form>
   </div>
 </div>
-<app-map></app-map>
+
 
 
