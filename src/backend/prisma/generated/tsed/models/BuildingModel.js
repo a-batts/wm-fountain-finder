@@ -36,8 +36,8 @@ __decorate([
     __metadata("design:type", Boolean)
 ], BuildingModel.prototype, "isPublic", void 0);
 __decorate([
-    (0, schema_1.Property)(() => FountainModel_1.FountainModel),
-    (0, schema_1.Allow)(null),
-    __metadata("design:type", FountainModel_1.FountainModel)
+    (0, schema_1.CollectionOf)(() => FountainModel_1.FountainModel),
+    (0, schema_1.Required)(),
+    __metadata("design:type", Array)
 ], BuildingModel.prototype, "fountains", void 0);
 exports.BuildingModel = BuildingModel;

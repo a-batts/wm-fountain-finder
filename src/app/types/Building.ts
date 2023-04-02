@@ -1,10 +1,10 @@
 import { Floor } from './Floor';
+import { Fountain } from './Fountain';
 
 export class Building {
-  public name: string;
-  public floors: Floor[];
-  constructor(name: string, floors: Floor[]) {
-    this.name = name;
-    this.floors = floors;
-  }
+  constructor(
+    public name: string,
+    public floors: Floor[],
+    public fountains: Fountain[]
+  ) {}
 }
