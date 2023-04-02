@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { FountainDescriptionComponent } from './fountain-description/fountain-description.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { FountainDescriptionComponent } from './fountain-description/fountain-de
     MatListModule,
     MatRippleModule,
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, MatSnackBar],
   bootstrap: [AppComponent],
 })
 export class AppModule {
