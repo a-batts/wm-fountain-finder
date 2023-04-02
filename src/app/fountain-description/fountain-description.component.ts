@@ -15,6 +15,7 @@ export class FountainDescriptionComponent {
 
   closeDescriptionPanel(): void {
     this.fountain = undefined;
+    this.showingFilterStatusPopup = false;
   }
 
   showFilterStatusPopup(): void {
