@@ -9,6 +9,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { FountainDescriptionComponent } from './fountain-description/fountain-description.component';
+import {MatIconModule, MatIconRegistry} from "@angular/material/icon";
+import {SearchPaneComponent} from "./search-pane/search-pane.component";
+import {AppComponent} from "./app.component";
+import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
+import {AppRoutingModule} from "./app-routing.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MapComponent} from "./map/map.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +31,7 @@ import { FountainDescriptionComponent } from './fountain-description/fountain-de
     FeedbackFormComponent,
     FeedbackFormDialog,
     FountainDescriptionComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
