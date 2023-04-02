@@ -150,7 +150,6 @@ export class SearchPaneComponent implements OnInit {
 
     //Reset the search box so that the search results panel becomes hidden
     this.buildingSelector.reset();
-    alert('Zoom to be implemented!');
   }
 
   /**

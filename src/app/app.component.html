@@ -2,6 +2,7 @@
   <div class="flex">
     <div class="flex-grow">
       <app-search-pane (selectedFountain)="onSelectedFountain($event)"></app-search-pane>
+      <app-fountain-description [(fountain)]="fountain"></app-fountain-description>
     </div>
     <app-feedback-form></app-feedback-form>
   </div>
