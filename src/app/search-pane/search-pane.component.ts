@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { map, Observable, startWith } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { Floor } from '../types/Floor';
@@ -13,6 +13,8 @@ import { FilterStatus } from '../types/FilterStatus';
   styleUrls: ['./search-pane.component.scss'],
 })
 export class SearchPaneComponent implements OnInit {
+  @Output() selectedFountain = new EventEmitter<Fountain>();
+
   //The floor the user wants to view fountains for when searching
   selectedFloor: Floor;
   buildingSelector = new FormControl('');
@@ -144,7 +146,10 @@ export class SearchPaneComponent implements OnInit {
    * @param fountain
    */
   zoomToFountain(fountain: Fountain): void {
-    alert('To be implemented!');
+    this.selectedFountain.emit(fountain);
+
+    //Reset the search box so that the search results panel becomes hidden
+    this.buildingSelector.reset();
   }
 
   /**
@@ -154,6 +159,9 @@ export class SearchPaneComponent implements OnInit {
    */
   private _filter(value: string): Building[] {
     const filterValue = value.toLowerCase();
+
+    //When the user starts to search, unselect the currently selected fountain to hide the panel
+    if (value) this.selectedFountain.emit(undefined);
 
     return this.buildings.filter((building: Building) =>
       building.name.toLowerCase().includes(filterValue)
