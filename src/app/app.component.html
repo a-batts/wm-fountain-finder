@@ -1,12 +1,14 @@
 <div class="px-8 py-6 mat-app-background h-screen">
   <div class="flex">
-    <div class="flex-grow">
+    <div class="flex-grow z-20">
       <app-search-pane (selectedFountain)="onSelectedFountain($event)"></app-search-pane>
       <app-fountain-description [(fountain)]="fountain"></app-fountain-description>
     </div>
-    <app-feedback-form></app-feedback-form>
+    <div class="z-30">
+      <app-feedback-form></app-feedback-form>
+    </div>
+     <app-map class="z-10 absolute"></app-map>
   </div>
 </div>
-<app-map></app-map>
 
 

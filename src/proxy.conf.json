@@ -1,6 +1,6 @@
 {
   "/rest/*": {
-    "target": "http://localhost:8083",
+    "target": "http://0.0.0.0:8083",
     "secure": false,
     "logLevel": "debug"
   }

@@ -23,6 +23,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MapComponent} from "./map/map.component";
+import {LeafletMarkerClusterModule} from "@asymmetrik/ngx-leaflet-markercluster";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {MapComponent} from "./map/map.component";
     MatRadioModule,
     MatListModule,
     MatRippleModule,
+    LeafletMarkerClusterModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
