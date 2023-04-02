@@ -1,7 +1,7 @@
 <div class="px-8 py-6 mat-app-background h-screen">
   <div class="flex">
     <div class="flex-grow">
-      <app-search-pane></app-search-pane>
+      <app-search-pane (selectedFountain)="onSelectedFountain($event)"></app-search-pane>
     </div>
     <app-feedback-form></app-feedback-form>
   </div>

@@ -22,6 +22,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
+import { FountainDescriptionComponent } from './fountain-description/fountain-description.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MatRippleModule } from '@angular/material/core';
     SearchPaneComponent,
     FeedbackFormComponent,
     FeedbackFormDialog,
+    FountainDescriptionComponent,
   ],
   imports: [
     BrowserModule,
