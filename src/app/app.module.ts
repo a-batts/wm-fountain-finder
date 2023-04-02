@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component';
 import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
 import { NgClickOutsideDirective } from 'ng-click-outside2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { NgClickOutsideDirective } from 'ng-click-outside2';
     LeafletMarkerClusterModule,
     NgClickOutsideDirective,
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, MatSnackBar],
   bootstrap: [AppComponent],
 })
 export class AppModule {
