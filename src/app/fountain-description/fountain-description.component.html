@@ -1,4 +1,4 @@
-<mat-card class="max-w-md mt-4" *ngIf="fountain != undefined">
+<mat-card class="max-w-md w-[28rem] mt-4" *ngIf="fountain != undefined" >
   <mat-card-content class="card-content">
     <div class="flex items-center">
       <div class="flex-grow pl-3">
@@ -22,7 +22,7 @@
     </div>
     <div class="flex mt-6 relative">
       <div class="flex-grow">
-        <button mat-button color="primary">Zoom to on map</button>
+        <button mat-button color="primary" (click)="zoomToFountain()">Zoom to on map</button>
       </div>
       <div *ngIf="fountain.filterStatus > 1">
         <button mat-button color="primary" (click)="showFilterStatusPopup()">Report filter status</button>
