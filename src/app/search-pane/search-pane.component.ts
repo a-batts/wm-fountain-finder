@@ -6,6 +6,7 @@ import { Building } from '../types/Building';
 import { HttpClient } from '@angular/common/http';
 import { Fountain } from '../types/Fountain';
 import { FilterStatus } from '../types/FilterStatus';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-search-pane',
@@ -14,6 +15,7 @@ import { FilterStatus } from '../types/FilterStatus';
 })
 export class SearchPaneComponent implements OnInit {
   @Output() selectedFountain = new EventEmitter<Fountain>();
+  @Output() gotUsersLocation = new EventEmitter<GeolocationPosition>();
 
   //The floor the user wants to view fountains for when searching
   selectedFloor: Floor;
@@ -23,7 +25,7 @@ export class SearchPaneComponent implements OnInit {
   filteredOptions: Observable<Building[]>;
   searchIsValidBuilding: boolean = false;
 
-  constructor(private client: HttpClient) {
+  constructor(private client: HttpClient, private _snackBar: MatSnackBar) {
     this.selectedFloor = Floor.Any;
 
     this.filteredOptions = this.buildingSelector.valueChanges.pipe(
@@ -151,7 +153,26 @@ export class SearchPaneComponent implements OnInit {
    * there should be some sort of fallback message.
    */
   getCurrentLocation(): void {
-    alert('To be implemented!');
+    const locationSuccessful = (position: GeolocationPosition) => {
+      console.log(position);
+
+      //Emit the user's location to the main component, so that it can be passed to the map component
+      this.gotUsersLocation.emit(position);
+    };
+    const locationFailed = (error: GeolocationPositionError) => {
+      //Notify the component that the app was not able to get the user's location
+      this._snackBar.open(
+        "Unable to get current location. Make sure you've enabled location access.",
+        'Done',
+        { duration: 8000 }
+      );
+    };
+
+    //Attempt to get the user's location
+    navigator.geolocation.getCurrentPosition(
+      locationSuccessful,
+      locationFailed
+    );
   }
 
   /**

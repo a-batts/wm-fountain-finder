@@ -23,6 +23,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MapComponent} from "./map/map.component";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import {MapComponent} from "./map/map.component";
     MatListModule,
     MatRippleModule,
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, MatSnackBar],
   bootstrap: [AppComponent],
 })
 export class AppModule {
