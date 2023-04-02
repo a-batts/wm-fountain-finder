@@ -20,6 +20,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
+import { MatListModule } from '@angular/material/list';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatTooltipModule,
     MatDialogModule,
     MatRadioModule,
+    MatListModule,
+    MatRippleModule,
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

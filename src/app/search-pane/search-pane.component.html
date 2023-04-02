@@ -30,3 +30,29 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+<mat-card class="max-w-lg mt-4" *ngIf="isValidBuilding">
+  <mat-card-content class="card-content">
+    <div *ngIf="possibleBuildingFountains.length > 0; else noFountains">
+      <h2>Results</h2>
+      <div class="fountain-list">
+        <mat-list>
+          <mat-list-item matRipple  *ngFor="let fountain of possibleBuildingFountains">
+            <span matListItemTitle>{{fountain.buildingName}} {{fountain.floor}}</span>
+            <span matListItemLine>{{fountain.location}}</span>
+            <button mat-icon-button matListItemMeta (click)="zoomToFountain(fountain)" matTooltip="Zoom to location on map">
+              <mat-icon>zoom_in_map</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+
+    <ng-template #noFountains>
+        <div class="flex items-center justify-center flex-col gap-y-6 py-6">
+          <mat-icon class="text-6xl location-icon">not_listed_location</mat-icon>
+          <h3>We couldn't find any fountains at the requested location</h3>
+        </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>
