@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build --configuration production && cd src/backend && npx prisma generate && npm run",
+    "preinstall": "npm install -g @angular/cli @angular/compiler-cli && cd src/backend && npm i"
   },
   "private": true,
   "dependencies": {
