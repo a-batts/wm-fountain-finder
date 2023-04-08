@@ -1,4 +1,4 @@
-<mat-card class="max-w-xl">
+<mat-card class="max-w-[100vw] sm:max-w-xl">
   <mat-card-content>
     <div class="flex flex-wrap gap-x-4">
       <mat-form-field class="flex-grow" appearance="outline">
@@ -42,7 +42,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="max-w-lg mt-4" *ngIf="searchIsValidBuilding">
+<mat-card class="sm:max-w-lg max-w-[100vw] mt-4" *ngIf="searchIsValidBuilding">
   <mat-card-content class="card-content">
     <div *ngIf="possibleBuildingFountains.length > 0; else noFountains">
       <h2>Results</h2>

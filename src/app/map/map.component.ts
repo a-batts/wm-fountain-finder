@@ -84,7 +84,6 @@ export class MapComponent implements AfterViewInit, OnInit {
         const marker = L.marker([fountain.lat, fountain.long], {
           icon: this.icon,
         }).on('click', () => this.setSelectedFountain(building, fountain));
-        marker.bindPopup(`<b>${building.name}</b><br>${fountain.location}`);
         group.push(marker);
       }
       this.addCluster(...group);
