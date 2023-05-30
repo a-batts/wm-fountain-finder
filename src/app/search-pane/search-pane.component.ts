@@ -72,14 +72,14 @@ export class SearchPaneComponent implements OnInit {
     let possibleFountains: Fountain[] = [];
 
     //Find the fountains that belong to the search query building
-    this.buildings.forEach((building: Building) => {
+    this.buildings.forEach((building: Building): void => {
       if (building.name == this.buildingSelector.value) {
         possibleFountains = building.fountains;
       }
     });
 
     //Return the fountains that match the selected filter, or all of the fountains if all floors is selected
-    return possibleFountains.filter((fountain: Fountain) => {
+    return possibleFountains.filter((fountain: Fountain): boolean => {
       //If the user is viewing only fountains with bottle fillers, hide the ones without one
       if (this.showingOnlyWithFillers && !fountain.hasFilter) return false;
 
@@ -96,7 +96,7 @@ export class SearchPaneComponent implements OnInit {
    * @private
    */
   private initBuildings(buildings: Object[]): void {
-    buildings.forEach((building: any) => {
+    buildings.forEach((building: any): void => {
       let floors: Floor[] = [];
       let fountains: Fountain[] = [];
 
@@ -153,13 +153,13 @@ export class SearchPaneComponent implements OnInit {
    * there should be some sort of fallback message.
    */
   getCurrentLocation(): void {
-    const locationSuccessful = (position: GeolocationPosition) => {
+    const locationSuccessful = (position: GeolocationPosition): void => {
       console.log(position);
 
       //Emit the user's location to the main component, so that it can be passed to the map component
       this.gotUsersLocation.emit(position);
     };
-    const locationFailed = (error: GeolocationPositionError) => {
+    const locationFailed = (error: GeolocationPositionError): void => {
       //Notify the component that the app was not able to get the user's location
       this._snackBar.open(
         "Unable to get current location. Make sure you've enabled location access.",

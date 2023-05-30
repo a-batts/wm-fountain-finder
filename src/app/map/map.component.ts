@@ -65,7 +65,7 @@ export class MapComponent implements AfterViewInit, OnInit {
     tiles.addTo(this.map);
   }
 
-  private addCluster(...markers: L.Marker[]) {
+  private addCluster(...markers: L.Marker[]): void {
     // @ts-ignore
     const group = new L.MarkerClusterGroup();
 
@@ -76,7 +76,7 @@ export class MapComponent implements AfterViewInit, OnInit {
     this.map?.addLayer(group);
   }
 
-  private addAll() {
+  private addAll(): void {
     console.log(this.buildings);
     let group: L.Marker[] = [];
     for (const building of this.buildings) {
@@ -125,11 +125,6 @@ export class MapComponent implements AfterViewInit, OnInit {
       )
     );
   }
-
-  private sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   private zoomTo(lat: number, long: number): void {
     this.map?.flyTo(L.latLng(lat, long), 18);
   }

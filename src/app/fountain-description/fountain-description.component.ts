@@ -49,7 +49,7 @@ export class FountainDescriptionComponent {
     this.fountainChange.emit(undefined);
 
     //Super short timeout to reload the location
-    setTimeout(() => {
+    setTimeout((): void => {
       this.fountainChange.emit(fountain);
       //Reattach the component again after the new state, should not re-render
       this.cdr.reattach();

@@ -7,10 +7,10 @@ import { Fountain } from './types/Fountain';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'cypher-viii';
+  title: string = 'cypher-viii';
   fountain: Fountain | undefined;
 
-  onSelectedFountain(fountain: Fountain) {
+  onSelectedFountain(fountain: Fountain): void {
     this.fountain = fountain;
   }
 }
