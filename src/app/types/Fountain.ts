@@ -3,15 +3,15 @@ import { FilterStatus } from './FilterStatus';
 
 export class Fountain {
   constructor(
-    public id: Number,
+    public id: number,
     public floor: Floor,
-    public lat: Number,
-    public long: Number,
-    public location: String,
-    public hasFilter: Boolean,
+    public lat: number,
+    public long: number,
+    public location: string,
+    public hasFilter: boolean,
     public filterStatus: FilterStatus,
-    public developerPick: Boolean,
-    public buildingName: String
+    public developerPick: boolean,
+    public buildingName: string
   ) {}
 
   getFilterColor(): string {
