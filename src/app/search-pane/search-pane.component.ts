@@ -1,11 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { map, Observable, startWith } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { Floor } from '../types/Floor';
 import { Building } from '../types/Building';
-import { HttpClient } from '@angular/common/http';
 import { Fountain } from '../types/Fountain';
-import { FilterStatus } from '../types/FilterStatus';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -13,31 +11,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './search-pane.component.html',
   styleUrls: ['./search-pane.component.scss'],
 })
-export class SearchPaneComponent implements OnInit {
+export class SearchPaneComponent {
   @Output() selectedFountain = new EventEmitter<Fountain>();
   @Output() gotUsersLocation = new EventEmitter<GeolocationPosition>();
+  @Input() buildings: Building[] = [];
 
   //The floor the user wants to view fountains for when searching
   selectedFloor: Floor;
   showingOnlyWithFillers: Boolean = false;
   buildingSelector = new FormControl('');
-  buildings: Building[] = [];
   filteredOptions: Observable<Building[]>;
   searchIsValidBuilding: boolean = false;
 
-  constructor(private client: HttpClient, private _snackBar: MatSnackBar) {
+  constructor(private _snackBar: MatSnackBar) {
     this.selectedFloor = Floor.Any;
 
     this.filteredOptions = this.buildingSelector.valueChanges.pipe(
       startWith(''),
       map((value: any) => this._filter(value || ''))
     );
-  }
-
-  ngOnInit(): void {
-    this.client
-      .get('/rest/buildings')
-      .subscribe((result) => this.initBuildings(result as Object[]));
   }
 
   /**
@@ -86,64 +78,6 @@ export class SearchPaneComponent implements OnInit {
       return (
         fountain.floor == this.selectedFloor || this.selectedFloor == Floor.Any
       );
-    });
-  }
-
-  /**
-   * Initialize all building objects to enable the search box autofill capabilities,
-   * and the floor selector for each building
-   * @param buildings
-   * @private
-   */
-  private initBuildings(buildings: Object[]): void {
-    buildings.forEach((building: any): void => {
-      let floors: Floor[] = [];
-      let fountains: Fountain[] = [];
-
-      //Add the existing floors to the building
-      let buildingFloors: string = building.floors;
-      if (buildingFloors.includes('0')) floors.push(Floor.Basement);
-      if (buildingFloors.includes('1')) floors.push(Floor.First);
-      if (buildingFloors.includes('2')) floors.push(Floor.Second);
-      if (buildingFloors.includes('3')) floors.push(Floor.Third);
-      if (buildingFloors.includes('4')) floors.push(Floor.Fourth);
-
-      building.fountains.forEach((fountain: any) => {
-        let floor: Floor = Floor.Basement;
-        switch (fountain.floor) {
-          case 0:
-            floor = Floor.Basement;
-            break;
-          case 1:
-            floor = Floor.First;
-            break;
-          case 2:
-            floor = Floor.Second;
-            break;
-          case 3:
-            floor = Floor.Third;
-            break;
-          case 4:
-            floor = Floor.Fourth;
-            break;
-        }
-
-        fountains.push(
-          new Fountain(
-            fountain.id,
-            floor,
-            fountain.lat,
-            fountain.long,
-            fountain.location,
-            fountain.hasBottleFiller,
-            fountain.filterStatus as FilterStatus,
-            fountain.developerPick,
-            building.name
-          )
-        );
-      });
-
-      this.buildings.push(new Building(building.name, floors, fountains));
     });
   }
 

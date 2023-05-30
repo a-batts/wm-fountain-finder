@@ -1,51 +1,42 @@
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
+  NgZone,
   OnInit,
   Output,
 } from '@angular/core';
 import * as L from 'leaflet';
 import { Icon } from 'leaflet';
-import { HttpClient } from '@angular/common/http';
 import { Fountain } from '../types/Fountain';
-import { Floor } from '../types/Floor';
-import { FilterStatus } from '../types/FilterStatus';
+import { Building } from '../types/Building';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements AfterViewInit, OnInit {
+export class MapComponent implements OnInit {
   @Output() selectedFountain = new EventEmitter<Fountain>();
+  @Input() buildings: Building[] = [];
   @Input() set fountain(fountain: Fountain | undefined) {
     if (fountain != undefined)
       this.zoomTo(fountain.lat.valueOf(), fountain.long.valueOf());
   }
 
   private map: L.Map | undefined;
-  buildings: any[] = [];
   icon = new Icon({
     iconUrl: 'assets/img.png',
     iconSize: [25, 25],
   });
 
-  constructor(private client: HttpClient) {}
+  // Observable that waits for the fountain data to be loaded so the map component can render
+  private fountainDataLoaded: Subscription | undefined;
 
-  async ngAfterViewInit() {
-    console.log('hi');
-    this.init();
-    const buildings = await fetch('/rest/buildings');
-    console.log(buildings);
-    this.buildings = await buildings.json();
-    this.addAll();
-  }
+  constructor(private ngZone: NgZone) {}
 
-  async ngOnInit(): Promise<void> {}
-
-  private init(): void {
+  async ngOnInit(): Promise<void> {
     this.map = L.map('map', {
       center: [37.270891027469624, -76.71510821725406],
       zoom: 16,
@@ -63,6 +54,32 @@ export class MapComponent implements AfterViewInit, OnInit {
     );
 
     tiles.addTo(this.map);
+
+    // Waits for the fetch event to complete and then loads data onto the map
+    this.fountainDataLoaded = this.ngZone.onMicrotaskEmpty.subscribe(
+      (): void => {
+        this.addData();
+      }
+    );
+  }
+
+  private addData(): void {
+    let group: L.Marker[] = [];
+
+    this.buildings.forEach((building: Building): void => {
+      building.fountains.forEach((fountain: Fountain): void => {
+        const marker = L.marker([fountain.lat, fountain.long], {
+          icon: this.icon,
+        }).on('click', () => this.selectedFountain.emit(fountain));
+        group.push(marker);
+      });
+    });
+
+    // Unsubscribe from the observable once fountain data is loaded
+    if (this.buildings.length > 0) this.fountainDataLoaded?.unsubscribe();
+
+    this.addCluster(...group);
+    group = [];
   }
 
   private addCluster(...markers: L.Marker[]): void {
@@ -76,55 +93,6 @@ export class MapComponent implements AfterViewInit, OnInit {
     this.map?.addLayer(group);
   }
 
-  private addAll(): void {
-    console.log(this.buildings);
-    let group: L.Marker[] = [];
-    for (const building of this.buildings) {
-      for (const fountain of building.fountains) {
-        const marker = L.marker([fountain.lat, fountain.long], {
-          icon: this.icon,
-        }).on('click', () => this.setSelectedFountain(building, fountain));
-        group.push(marker);
-      }
-      this.addCluster(...group);
-      group = [];
-    }
-  }
-
-  private setSelectedFountain(building: any, fountain: any): void {
-    let floor: Floor = Floor.Basement;
-    switch (fountain.floor) {
-      case 0:
-        floor = Floor.Basement;
-        break;
-      case 1:
-        floor = Floor.First;
-        break;
-      case 2:
-        floor = Floor.Second;
-        break;
-      case 3:
-        floor = Floor.Third;
-        break;
-      case 4:
-        floor = Floor.Fourth;
-        break;
-    }
-
-    this.selectedFountain.emit(
-      new Fountain(
-        fountain.id,
-        floor,
-        fountain.lat,
-        fountain.long,
-        fountain.location,
-        fountain.hasBottleFiller,
-        fountain.filterStatus as FilterStatus,
-        fountain.developerPick,
-        building.name
-      )
-    );
-  }
   private zoomTo(lat: number, long: number): void {
     this.map?.flyTo(L.latLng(lat, long), 18);
   }

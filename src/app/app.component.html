@@ -1,12 +1,11 @@
 <div class="mat-app-background">
-  <app-search-pane class="absolute top-4 sm:left-8 z-30 max-h-[13.75rem]" (selectedFountain)="onSelectedFountain($event)"></app-search-pane>
+  <app-search-pane class="absolute top-4 sm:left-8 z-30 max-h-[13.75rem]" [buildings]="buildings" (selectedFountain)="onSelectedFountain($event)"></app-search-pane>
   <app-fountain-description class="absolute z-30 sm:left-8 bottom-0 sm:top-[15.3rem]" [(fountain)]="fountain"></app-fountain-description>
 
   <div class="absolute bottom-4 left-4 sm:bottom-auto sm:left-auto sm:top-6 sm:right-8 z-10">
     <app-feedback-form></app-feedback-form>
   </div>
-  <app-map class="z-0 fixed" [fountain]="fountain" (selectedFountain)="onSelectedFountain($event)"></app-map>
+  <app-map class="z-0 fixed" [buildings]="buildings" [fountain]="fountain" (selectedFountain)="onSelectedFountain($event)"></app-map>
 </div>
-<app-map></app-map>
 
 
