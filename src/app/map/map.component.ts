@@ -20,6 +20,11 @@ import { Subscription } from 'rxjs';
 export class MapComponent implements OnInit {
   @Output() selectedFountain = new EventEmitter<Fountain>();
   @Input() buildings: Building[] = [];
+  @Input() set userLocation(location: GeolocationPosition | undefined) {
+    // When the user's location is updated, move the map to that position
+    if (location != undefined)
+      this.zoomTo(location.coords.latitude, location.coords.longitude);
+  }
   @Input() set fountain(fountain: Fountain | undefined) {
     if (fountain != undefined)
       this.zoomTo(fountain.lat.valueOf(), fountain.long.valueOf());
