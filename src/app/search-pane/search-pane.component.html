@@ -42,9 +42,11 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="sm:max-w-lg max-w-[100vw] mt-4" *ngIf="searchIsValidBuilding">
+<mat-card class="sm:max-w-lg max-w-[100vw] mt-4" *ngIf="resultsMode != 0">
   <mat-card-content class="card-content">
-    <div *ngIf="possibleBuildingFountains.length > 0; else noFountains">
+    <ng-container [ngTemplateOutlet]="possibleBuildingFountains.length > 0 ? hasFountains
+    : resultsMode == 2 ? noCloseFountains : noFountains" />
+    <ng-template #hasFountains>
       <h2>Results</h2>
       <div class="fountain-list">
         <mat-list>
@@ -57,7 +59,14 @@
           </mat-list-item>
         </mat-list>
       </div>
-    </div>
+    </ng-template>
+
+    <ng-template #noCloseFountains>
+      <div class="flex items-center justify-center flex-col gap-y-6 py-6">
+        <mat-icon class="text-6xl location-icon">near_me_disabled</mat-icon>
+        <h3>We couldn't find any fountains close to your location</h3>
+      </div>
+    </ng-template>
 
     <ng-template #noFountains>
         <div class="flex items-center justify-center flex-col gap-y-6 py-6">

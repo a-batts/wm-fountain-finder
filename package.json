@@ -26,6 +26,7 @@
     "@asymmetrik/ngx-leaflet-markercluster": "^15.0.0",
     "@prisma/client": "^4.12.0",
     "@types/leaflet.markercluster": "^1.5.1",
+    "geolib": "^3.3.4",
     "leaflet": "^1.9.3",
     "leaflet.markercluster": "^1.5.3",
     "ng-click-outside2": "^11.1.0",
