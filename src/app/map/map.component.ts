@@ -11,6 +11,7 @@ import { Icon } from 'leaflet';
 import { Fountain } from '../types/Fountain';
 import { Building } from '../types/Building';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-map',
@@ -49,12 +50,17 @@ export class MapComponent implements OnInit {
     this.map.zoomControl.setPosition('bottomright');
 
     const tiles = L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}{r}?access_token={accessToken}',
       {
-        maxZoom: 18,
-        minZoom: 1,
         attribution:
-          'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+          '&copy; <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a> ' +
+          '<a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a>',
+        tileSize: 512,
+        maxZoom: 18,
+        minZoom: 14,
+        zoomOffset: -1,
+        id: 'mapbox/streets-v11',
+        accessToken: environment.mapboxApiKey,
       }
     );
 
