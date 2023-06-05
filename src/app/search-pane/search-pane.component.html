@@ -47,7 +47,8 @@
     <ng-container [ngTemplateOutlet]="possibleBuildingFountains.length > 0 ? hasFountains
     : resultsMode == 2 ? noCloseFountains : noFountains" />
     <ng-template #hasFountains>
-      <h2>Results</h2>
+      <h2 class="!mb-2">Results</h2>
+      <h4 *ngIf="resultsMode == 2">Showing fountains closest to you</h4>
       <div class="fountain-list">
         <mat-list>
           <mat-list-item matRipple  *ngFor="let fountain of possibleBuildingFountains">
