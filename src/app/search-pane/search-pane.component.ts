@@ -5,6 +5,13 @@ import { Floor } from '../types/Floor';
 import { Building } from '../types/Building';
 import { Fountain } from '../types/Fountain';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as geolib from 'geolib';
+
+export enum ResultsMode {
+  NONE,
+  QUERY,
+  LOCATION,
+}
 
 @Component({
   selector: 'app-search-pane',
@@ -16,12 +23,17 @@ export class SearchPaneComponent {
   @Output() gotUsersLocation = new EventEmitter<GeolocationPosition>();
   @Input() buildings: Building[] = [];
 
+  // If results are hidden, are being shown by location, or by query
+  resultsMode: ResultsMode = ResultsMode.NONE;
+
+  // The user's position
+  private userPosition: GeolocationPosition | undefined;
+
   // The floor the user wants to view fountains for when searching
   selectedFloor: Floor;
   showingOnlyWithFillers: Boolean = false;
   buildingSelector = new FormControl('');
   filteredOptions: Observable<Building[]>;
-  searchIsValidBuilding: boolean = false;
 
   constructor(private _snackBar: MatSnackBar) {
     this.selectedFloor = Floor.Any;
@@ -40,15 +52,15 @@ export class SearchPaneComponent {
   getPossibleFloors(): string[] {
     let possibleFloors: string[] = [];
 
-    // Whether the entered building name is a valid building
-    this.searchIsValidBuilding = false;
+    if (this.resultsMode !== ResultsMode.LOCATION)
+      this.resultsMode = ResultsMode.NONE;
 
     this.buildings.forEach((building: Building) => {
       if (building.name == this.buildingSelector.value) {
         possibleFloors = building.floors;
 
         // The building matches so it is valid
-        this.searchIsValidBuilding = true;
+        this.resultsMode = ResultsMode.QUERY;
       }
     });
 
@@ -63,11 +75,47 @@ export class SearchPaneComponent {
   get possibleBuildingFountains(): Fountain[] {
     let possibleFountains: Fountain[] = [];
 
-    // Find the fountains that belong to the search query building
+    // If the user has shared their location, display results by location
+    if (this.resultsMode === ResultsMode.LOCATION && this.userPosition) {
+      const coords: GeolocationCoordinates = this.userPosition
+        .coords as GeolocationCoordinates;
+
+      // Iterate through each fountain and find the closest ones
+      this.buildings.forEach((building: Building): void => {
+        building.fountains.forEach((fountain: Fountain): void => {
+          // Calculate the distance between the person and the fountain
+          let distance = geolib.getDistance(
+            [fountain.lat, fountain.long],
+            [coords.latitude, coords.longitude]
+          );
+
+          // Only push very close fountains
+          if (distance < 150) possibleFountains.push(fountain);
+
+          // Sort by distance - closest fountains should be shown first
+          possibleFountains.sort((a: Fountain, b: Fountain): number => {
+            return (
+              geolib.getDistance(
+                [a.lat, a.long],
+                [coords.latitude, coords.longitude]
+              ) -
+              geolib.getDistance(
+                [b.lat, b.long],
+                [coords.latitude, coords.longitude]
+              )
+            );
+          });
+        });
+      });
+
+      // Return the fountains that are closest to the user
+      return possibleFountains.slice(0, 8);
+    }
+
+    // Otherwise find fountains based on the search query
     this.buildings.forEach((building: Building): void => {
-      if (building.name == this.buildingSelector.value) {
+      if (building.name == this.buildingSelector.value)
         possibleFountains = building.fountains;
-      }
     });
 
     // Return the fountains that match the selected filter, or all of the fountains if all floors is selected
@@ -88,15 +136,20 @@ export class SearchPaneComponent {
    */
   getCurrentLocation(): void {
     const locationSuccessful = (position: GeolocationPosition): void => {
-      console.log(position);
+      // Save the coordinates to a variable
+      this.userPosition = position;
+      this.resetQuery();
+
+      // Emit that no fountain was selected so the details pane closes
+      this.selectedFountain.emit(undefined);
 
       // Emit the user's location to the main component, so that it can be passed to the map component
       this.gotUsersLocation.emit(position);
 
-      // Suggest a few fountains to the user
-      // TODO: need to figure out how to integrate this into the existing search system
+      // Switch the results panel to fetching results based on location
+      this.resultsMode = ResultsMode.LOCATION;
     };
-    const locationFailed = (error: GeolocationPositionError): void => {
+    const locationFailed = (): void => {
       // Notify the component that the app was not able to get the user's location
       this._snackBar.open(
         "Unable to get current location. Make sure you've enabled location access.",
@@ -121,6 +174,17 @@ export class SearchPaneComponent {
 
     // Reset the search box so that the search results panel becomes hidden
     this.buildingSelector.reset();
+    this.resultsMode = ResultsMode.NONE;
+  }
+
+  /**
+   * Reset the query back to defaults
+   * @private
+   */
+  private resetQuery(): void {
+    this.selectedFloor = Floor.Any;
+    this.buildingSelector.reset();
+    this.showingOnlyWithFillers = false;
   }
 
   /**
