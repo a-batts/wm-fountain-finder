@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   title: string = 'cypher-viii';
   buildings: Building[] = [];
   fountain: Fountain | undefined;
+  userLocation: GeolocationPosition | undefined;
 
   constructor(private client: HttpClient) {}
 
@@ -81,7 +82,19 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /**
+   * Store the selected fountain
+   * @param fountain
+   */
   onSelectedFountain(fountain: Fountain): void {
     this.fountain = fountain;
+  }
+
+  /**
+   * Store the user's location
+   * @param location
+   */
+  onLocationGot(location: GeolocationPosition): void {
+    this.userLocation = location;
   }
 }

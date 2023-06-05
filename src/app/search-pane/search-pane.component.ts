@@ -16,7 +16,7 @@ export class SearchPaneComponent {
   @Output() gotUsersLocation = new EventEmitter<GeolocationPosition>();
   @Input() buildings: Building[] = [];
 
-  //The floor the user wants to view fountains for when searching
+  // The floor the user wants to view fountains for when searching
   selectedFloor: Floor;
   showingOnlyWithFillers: Boolean = false;
   buildingSelector = new FormControl('');
@@ -40,14 +40,14 @@ export class SearchPaneComponent {
   getPossibleFloors(): string[] {
     let possibleFloors: string[] = [];
 
-    //Whether the entered building name is a valid building
+    // Whether the entered building name is a valid building
     this.searchIsValidBuilding = false;
 
     this.buildings.forEach((building: Building) => {
       if (building.name == this.buildingSelector.value) {
         possibleFloors = building.floors;
 
-        //The building matches so it is valid
+        // The building matches so it is valid
         this.searchIsValidBuilding = true;
       }
     });
@@ -63,16 +63,16 @@ export class SearchPaneComponent {
   get possibleBuildingFountains(): Fountain[] {
     let possibleFountains: Fountain[] = [];
 
-    //Find the fountains that belong to the search query building
+    // Find the fountains that belong to the search query building
     this.buildings.forEach((building: Building): void => {
       if (building.name == this.buildingSelector.value) {
         possibleFountains = building.fountains;
       }
     });
 
-    //Return the fountains that match the selected filter, or all of the fountains if all floors is selected
+    // Return the fountains that match the selected filter, or all of the fountains if all floors is selected
     return possibleFountains.filter((fountain: Fountain): boolean => {
-      //If the user is viewing only fountains with bottle fillers, hide the ones without one
+      // If the user is viewing only fountains with bottle fillers, hide the ones without one
       if (this.showingOnlyWithFillers && !fountain.hasFilter) return false;
 
       return (
@@ -90,11 +90,14 @@ export class SearchPaneComponent {
     const locationSuccessful = (position: GeolocationPosition): void => {
       console.log(position);
 
-      //Emit the user's location to the main component, so that it can be passed to the map component
+      // Emit the user's location to the main component, so that it can be passed to the map component
       this.gotUsersLocation.emit(position);
+
+      // Suggest a few fountains to the user
+      // TODO: need to figure out how to integrate this into the existing search system
     };
     const locationFailed = (error: GeolocationPositionError): void => {
-      //Notify the component that the app was not able to get the user's location
+      // Notify the component that the app was not able to get the user's location
       this._snackBar.open(
         "Unable to get current location. Make sure you've enabled location access.",
         'Done',
@@ -116,7 +119,7 @@ export class SearchPaneComponent {
   zoomToFountain(fountain: Fountain): void {
     this.selectedFountain.emit(fountain);
 
-    //Reset the search box so that the search results panel becomes hidden
+    // Reset the search box so that the search results panel becomes hidden
     this.buildingSelector.reset();
   }
 
@@ -128,7 +131,7 @@ export class SearchPaneComponent {
   private _filter(value: string): Building[] {
     const filterValue = value.toLowerCase();
 
-    //When the user starts to search, unselect the currently selected fountain to hide the panel
+    // When the user starts to search, unselect the currently selected fountain to hide the panel
     if (value) this.selectedFountain.emit(undefined);
 
     return this.buildings.filter((building: Building) =>
