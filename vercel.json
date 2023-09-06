@@ -9,7 +9,7 @@
       }
     },
     {
-      "src": "src/backend/tsed-app",
+      "src": "src/backend/src",
       "use": "@vercel/node"
     }
   ],
