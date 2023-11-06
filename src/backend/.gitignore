@@ -50,7 +50,7 @@ test/**/*.js.map
 
 # Project
 /public
-/dist
+# /dist
 
 #env
 .env.local
